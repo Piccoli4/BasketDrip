@@ -11,9 +11,17 @@ import {
 
 const ItemListContainer = () => {
   return (
-    <Flex justify={'center'} align={'center'}> 
+    <Flex align={'center'}> 
         <Menu>
-            <MenuButton as={Button} rightIcon={<FaAngleDown />}>Todas</MenuButton>
+            <MenuButton 
+              as={Button} 
+              rightIcon={<FaAngleDown />} 
+              backgroundColor={'#FFA500'} 
+              w={'200px'}
+              borderRadius={'none'}
+            >
+              Marcas
+            </MenuButton>
             <MenuList>
                 <MenuItem>Nike</MenuItem>
                 <MenuItem>Adidas</MenuItem>

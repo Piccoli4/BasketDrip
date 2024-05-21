@@ -19,10 +19,11 @@ const ItemListContainer = () => {
               backgroundColor={'#FFA500'} 
               w={'200px'}
               borderRadius={'none'}
+              fontFamily={'Permanent Marker'}
             >
               Marcas
             </MenuButton>
-            <MenuList>
+            <MenuList fontFamily={'Permanent Marker'}>
                 <MenuItem>Nike</MenuItem>
                 <MenuItem>Adidas</MenuItem>
                 <MenuItem>Under Armor</MenuItem>

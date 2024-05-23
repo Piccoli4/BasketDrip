@@ -8,7 +8,7 @@ import {
 
 const NavBar = ({title}) => {
   return (
-    <Flex h={'12vh'} w={'100%'} justify={'space-between'} align={'center'} backgroundColor={'#FFA500'}>
+    <Flex h={'12vh'} w={'100%'} justify={'space-between'} align={'center'} backgroundColor={'#FF6F00'}>
         <Image src="../Img/logo.png" alt="Logo" m={4} w={12} h={16}/>
         <Flex justify={'center'} align={'center'} >
             <Heading 

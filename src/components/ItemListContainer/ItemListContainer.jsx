@@ -9,19 +9,27 @@ import {
     Box
   } from '@chakra-ui/react'
 import { FaAngleDown } from "react-icons/fa6"
-import { getProductos } from '../../data/asyncMock'
+import { getProductos, getProductsByMarca } from '../../data/asyncMock'
 import ItemList from '../ItemList/ItemList'
+import { Link, useParams } from 'react-router-dom'
+import Spinner from '../Spinner/Spinner'
 
 const ItemListContainer = () => {
 
   const [ productos, setProductos ] = useState([])
+  const [ loading, setLoading ] = useState(true)
+
+  const { markId } = useParams()
 
   useEffect(() => {
-    getProductos()
-      .then((res) => setProductos(res))
-      .catch((error) => console.log(error))
-
-  }, [])
+    setLoading(true)
+    const dataProductos = markId ? getProductsByMarca(markId) : getProductos()
+    
+    dataProductos
+    .then((data) => setProductos(data))
+    .catch((error) => console.log(error))
+    .finally(() => setLoading(false))
+  }, [markId])
 
   return (
     <Box>
@@ -39,13 +47,26 @@ const ItemListContainer = () => {
                 Marcas
               </MenuButton>
               <MenuList fontFamily={'Montserrat, sans-serif'} fontWeight={'900'}>
-                  <MenuItem fontFamily={'Montserrat, sans-serif'} fontWeight={'600'}>Nike</MenuItem>
-                  <MenuItem fontFamily={'Montserrat, sans-serif'} fontWeight={'600'}>Adidas</MenuItem>
-                  <MenuItem fontFamily={'Montserrat, sans-serif'} fontWeight={'600'}>Under Armor</MenuItem>
+                  <MenuItem fontFamily={'Montserrat, sans-serif'} fontWeight={'600'}>
+                    <Link to='/marca/Nike'>Nike</Link>
+                  </MenuItem>
+                  <MenuItem fontFamily={'Montserrat, sans-serif'} fontWeight={'600'}>
+                    <Link to='/marca/Adidas'>Adidas</Link> 
+                  </MenuItem>
+                  <MenuItem fontFamily={'Montserrat, sans-serif'} fontWeight={'600'}>
+                    <Link to='/marca/Under_Armor'>Under Armor</Link>
+                  </MenuItem>
               </MenuList>
           </Menu>
       </Flex>
-      <ItemList productos={productos}/>
+      { 
+        loading ? 
+        <Flex justify={'center'} align={'center'} h={'75vh'}>
+          <Spinner />
+        </Flex>
+        : 
+        <ItemList productos={productos}/> 
+      }
     </Box>
   )
 }

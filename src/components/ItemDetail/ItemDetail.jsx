@@ -1,17 +1,34 @@
-import React from 'react'
+import React, { useContext, useState } from 'react'
 import ItemCount from '../ItemCount/ItemCount'
 import { ToastContainer, toast } from 'react-toastify';
 import { Box, Button, Flex, Image, Text } from '@chakra-ui/react';
+import Context from '../../context/CartContext';
+import { Link } from 'react-router-dom';
 
-const ItemDetail = ({marca, modelo, precio, stock, descripcion, img, talle}) => {
+const ItemDetail = ({marca, modelo, precio, stock, descripcion, img, talle, id}) => {
+    const [ cantidad, setCantidad ] = useState(0)
+    const { addItem } = useContext(Context)
+
+
 
     const onAdd = (quantity) => {
-        toast(`Agregaste ${quantity === 1 ? '1 unidad' : `${quantity} unidades`}.`)
+
+        const item = {
+            id,
+            marca,
+            modelo,
+            precio
+        }
+
+        addItem(item, quantity)
+
+        toast(`Agregaste ${quantity === 1 ? `1 par de ${marca} ${modelo}` : `${quantity} pares de ${marca} ${modelo}`}.`)
+        setCantidad(quantity)
     }
 
   return (
     <Flex justify={'space-evenly'} align={'center'} minH={'70vh'}>
-        <Flex minW={'60%'} direction={'column'} justify={'space-evenly'} align={'center'} gap={1}>
+        <Flex maxW={'60%'} direction={'column'} justify={'space-evenly'} align={'center'} gap={1}>
             <Flex justify={'center'} align={'center'}>
                 <Image 
                     src={img} 
@@ -70,8 +87,39 @@ const ItemDetail = ({marca, modelo, precio, stock, descripcion, img, talle}) => 
             <Text fontFamily='Montserrat, sans-serif' fontWeight='500' fontSize={'30px'} color='primary'>
                 ${precio.toLocaleString('es-ES')}
             </Text>
-            <Flex>
-                <ItemCount stock={stock} valorInicial={1} onAdd={onAdd} />
+            <Flex> 
+                {
+                    cantidad > 0 ?
+                    <Flex justify={'space-between'} w={'60%'}>
+                        <Button
+                            size='xl'
+                            fontWeight={'400'} 
+                            backgroundColor='#FF6F00' 
+                            p={3}
+                            boxShadow={'2px 2px 6px #777'}
+                            textShadow={'1px 1.5px 3px #FFF'}
+                            _hover={{backgroundColor: '#FFC7AD'}}
+                            _active={{transform: 'scale(.9)'}}
+                        >
+                            <Link to='/cart'>Ir al Carrito</Link>
+                        </Button>
+                        <Button
+                            size='xl'
+                            fontWeight={'400'} 
+                            backgroundColor='#FF6F00' 
+                            p={3}
+                            boxShadow={'2px 2px 6px #777'}
+                            textShadow={'1px 1.5px 3px #FFF'}
+                            _hover={{backgroundColor: '#FFC7AD'}}
+                            _active={{transform: 'scale(.9)'}}
+                        >
+                            <Link to='/'>Seguir Comprando</Link>
+                        </Button>
+                    </Flex>
+                    :
+                    <ItemCount stock={stock} valorInicial={1} onAdd={onAdd} />
+
+                }
             </Flex>
             <ToastContainer />
         </Flex>

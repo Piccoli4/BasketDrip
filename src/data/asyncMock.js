@@ -139,7 +139,7 @@ export const productos = [
     return new Promise ((res) => {
       setTimeout(() => {
         res(productos);
-      }, 3000);
+      }, 1500);
     });
   };
 
@@ -148,7 +148,7 @@ export const productos = [
       const productosFiltrados = productos.filter ((prod) => prod.marca === mark)
       setTimeout(() => {
         res(productosFiltrados);
-      }, 3000);
+      }, 1500);
     })
   }
 
@@ -157,6 +157,6 @@ export const productos = [
       const productoFiltrado = productos.find ((prod) => prod.id === parseInt(id))
       setTimeout(() => {
         res(productoFiltrado)
-      }, 3000);
+      }, 1500);
     })
   }

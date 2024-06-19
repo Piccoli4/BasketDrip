@@ -6,6 +6,8 @@ import NavBar from './components/NavBar/NavBar'
 import { BrowserRouter, Route, Routes } from 'react-router-dom'
 import ItemDetailContainer from './components/ItemDetailContainer/ItemDetailContainer'
 import PageNotFound from './components/PageNotFound/PageNotFound';
+import { CartContextProvider } from './context/CartContext';
+import Cart from './components/Cart/Cart';
 
 
 function App() {
@@ -14,15 +16,18 @@ function App() {
   return (
 
     <ChakraProvider>
-      <BrowserRouter>
-        <NavBar title='E-commerce'/>
-        <Routes>
-          <Route path='/' element={<ItemListContainer/>} />
-          <Route path='/marca/:markId' element={<ItemListContainer/>} />
-          <Route path='/producto/:productId' element={<ItemDetailContainer/>} />
-          <Route path='*' element={<PageNotFound/>} />
-        </Routes>
-      </BrowserRouter>
+      <CartContextProvider>
+        <BrowserRouter>
+          <NavBar title='E-commerce'/>
+          <Routes>
+            <Route path='/' element={<ItemListContainer/>} />
+            <Route path='/marca/:markId' element={<ItemListContainer/>} />
+            <Route path='/producto/:productId' element={<ItemDetailContainer/>} />
+            <Route path='/cart' element={<Cart/>}/>
+            <Route path='*' element={<PageNotFound/>} />
+          </Routes>
+        </BrowserRouter>
+      </CartContextProvider>
     </ChakraProvider>
   )
 }

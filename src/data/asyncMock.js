@@ -131,6 +131,17 @@ export const productos = [
     descripcion: "Elegancia y rendimiento con el Curry 4, ideales para un juego rápido y preciso.",
     img: "https://basketworld.com/27407-large_default/curry-4-flotro-suit-tie.jpg",
   },
+  {
+    id: 13,
+    marca: "361°",
+    modelo: "AG3 Pro High Reflection Edition",
+    precio: 7990,
+    categoria: "Zapatillas",
+    talle: "10",
+    stock: 5,
+    descripcion: "El producto estrella de 361 grados, se inspira en el concepto taoísta del yin y el yang. Con el diseño de la parte superior y la suela divididos según la lógica de movimiento de Aaron Gordon",
+    img: "https://capaccionideportes.com.ar/46620-thickbox_default/361-ag3-pro-high-reflection-edition.jpg",
+  },
 ];
 
 

@@ -17,7 +17,8 @@ const ItemDetail = ({marca, modelo, precio, stock, descripcion, img, talle, id})
             id,
             marca,
             modelo,
-            precio
+            precio,
+            img
         }
 
         addItem(item, quantity)
@@ -51,7 +52,7 @@ const ItemDetail = ({marca, modelo, precio, stock, descripcion, img, talle, id})
             </Flex>
         </Flex>
         <Flex 
-            minW={'40%'}
+            w={'40%'}
             minH={'100%'}
             direction={'column'}
             justify={'space-evenly'}
@@ -62,7 +63,7 @@ const ItemDetail = ({marca, modelo, precio, stock, descripcion, img, talle, id})
             <Text fontFamily='Montserrat, sans-serif' fontWeight='500' color='gray.700' fontSize={'22px'} mb={1}>
                 {modelo}
             </Text>
-            <Text fontFamily='Montserrat, sans-serif' fontWeight='500' color='gray.500' fontSize={'20px'} mb={5}>
+            <Text fontFamily='Montserrat, sans-serif' fontWeight='500' color='gray.500' fontSize={'16px'} mb={5}>
                 {descripcion}
             </Text>
             <Box fontFamily='Montserrat, sans-serif' fontWeight='500' color='gray.700' mt={5} mb={5}>

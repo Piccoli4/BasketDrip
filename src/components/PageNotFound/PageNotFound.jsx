@@ -26,6 +26,7 @@ const PageNotFound = () => {
             boxShadow={'2px 2px 6px #777'}
             textShadow={'1px 1.5px 3px #FFF'}
             _active={{transform: 'scale(.9)'}} 
+            _hover={{backgroundColor:'#FFD1AD'}} 
           >
             Volver al inicio
           </Button>

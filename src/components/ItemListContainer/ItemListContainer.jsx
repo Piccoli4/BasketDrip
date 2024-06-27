@@ -56,6 +56,9 @@ const ItemListContainer = () => {
                   <MenuItem fontFamily={'Montserrat, sans-serif'} fontWeight={'600'}>
                     <Link to='/marca/Under_Armor'>Under Armor</Link>
                   </MenuItem>
+                  <MenuItem fontFamily={'Montserrat, sans-serif'} fontWeight={'600'}>
+                    <Link to='/marca/361'>361°</Link>
+                  </MenuItem>
               </MenuList>
           </Menu>
       </Flex>

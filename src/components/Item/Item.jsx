@@ -35,7 +35,14 @@ const Item = ({ marca, modelo, precio, img, id }) => {
       <Divider />
       <ButtonGroup spacing='2' mt={3}>
         <Link to={`/producto/${id}`}>
-          <Button size='md' bg='#FF6F00' color='white' _hover={{ bg: '#E65C00', boxShadow: '2px 2px 6px #aaa', cursor: 'Pointer' }} _active={{transform: 'scale(.9)'}}>
+          <Button 
+            size='md' 
+            bg='#FF6F00' 
+            color='white' 
+            textShadow={'2px 1.5px 3px #000'}
+            _hover={{ bg: '#E65C00', boxShadow: '2px 2px 6px #aaa', cursor: 'Pointer' }} 
+            _active={{transform: 'scale(.9)'}}
+          >
             Detalle
           </Button>
         </Link>

@@ -32,7 +32,8 @@ const Cart = () => {
                         p={6}
                         boxShadow={'2px 2px 6px #777'}
                         textShadow={'1px 1.5px 3px #FFF'}
-                        _active={{transform: 'scale(.9)'}} 
+                        _active={{transform: 'scale(.9)'}}
+                        _hover={{backgroundColor:'#FFD1AD'}}  
                     >
                         Ver productos
                     </Button>
@@ -44,7 +45,9 @@ const Cart = () => {
             <TableContainer>
                 <Heading 
                     align={'center'} 
-                    mb={'5'}
+                    m={'3'}
+                    fontFamily={'Permanent Marker'}
+                    fontSize={'25px'}
                     textShadow={'1.5px 1.5px 2px #777, 4px 4px 3px #ccc'}
                 >
                     CARRITO DE COMPRAS
@@ -52,10 +55,10 @@ const Cart = () => {
                 <Table>
                     <Thead>
                         <Tr>
-                            <Th>Producto</Th>
-                            <Th textAlign={'center'}>Precio</Th>
-                            <Th textAlign={'center'}>Cantidad</Th>
-                            <Th textAlign={'center'}>Subtotal</Th>
+                            <Th fontSize={'15px'}>Producto</Th>
+                            <Th textAlign={'center'} fontSize={'15px'}>Precio</Th>
+                            <Th textAlign={'center'} fontSize={'15px'}>Cantidad</Th>
+                            <Th textAlign={'center'} fontSize={'15px'}>Subtotal</Th>
                         </Tr>
                     </Thead>
                     <Tbody>
@@ -83,14 +86,42 @@ const Cart = () => {
                                                 boxSize='130px'
                                             />
                                             <Flex direction={'column'}>
-                                                <Box>{prod.marca}</Box> 
-                                                <Box>{prod.modelo}</Box>
+                                                <Box 
+                                                    fontSize={'20px'}
+                                                    fontWeight={'700'}
+                                                >
+                                                    {prod.marca}
+                                                </Box> 
+                                                <Box
+                                                    fontSize={'18px'}
+                                                    fontWeight={'500'}
+                                                >
+                                                    {prod.modelo}
+                                                </Box>
                                             </Flex>
                                         </Flex>
                                     </Td>
-                                    <Td textAlign={'center'}>${prod.precio}</Td>
-                                    <Td textAlign={'center'}>{prod.quantity}</Td>
-                                    <Td textAlign={'center'}>${prod.precio * prod.quantity}</Td>
+                                    <Td 
+                                        textAlign={'center'}
+                                        fontSize={'18px'}
+                                        fontWeight={'500'}
+                                    >
+                                        ${prod.precio}
+                                    </Td>
+                                    <Td 
+                                        textAlign={'center'}
+                                        fontSize={'18px'}
+                                        fontWeight={'500'}
+                                    >
+                                        {prod.quantity}
+                                    </Td>
+                                    <Td 
+                                        textAlign={'center'}
+                                        fontSize={'18px'}
+                                        fontWeight={'500'}
+                                    >
+                                        ${prod.precio * prod.quantity}
+                                    </Td>
                                 </Tr>
                             ))     
                         }
@@ -98,12 +129,41 @@ const Cart = () => {
                     <Tfoot>
                         <Tr>
                             <Th>
-                                <Button onClick={() => clearCart()}>
+                                <Button 
+                                    onClick={() => clearCart()}
+                                    fontSize={'20px'}
+                                    fontWeight={'500'} 
+                                    backgroundColor='#FF6F00' 
+                                    p={4}
+                                    boxShadow={'2px 2px 6px #777'}
+                                    textShadow={'1px 1.5px 3px #FFF'}
+                                    _active={{transform: 'scale(.9)'}}
+                                    _hover={{backgroundColor:'#FFD1AD'}} 
+                                >
                                     Vaciar Carrito
                                 </Button>
                             </Th>
-                            <Th colSpan={3}>Total del carrito</Th>
-                            <Th>${getTotal()}</Th>
+                            <Th colSpan={2} fontSize={'18px'}>Total del carrito</Th>
+                            <Th textAlign={'center'} fontSize={'20px'}>${getTotal()}</Th>
+                        </Tr>
+                        <Tr>
+                            <Th></Th>
+                            <Th colSpan={2}></Th>
+                            <Th textAlign={'center'}>
+                                <Button
+                                    w={'60%'}
+                                    fontSize={'20px'}
+                                    fontWeight={'500'} 
+                                    backgroundColor='#FF6F00' 
+                                    p={4}
+                                    boxShadow={'2px 2px 6px #777'}
+                                    textShadow={'1px 1.5px 3px #FFF'}
+                                    _active={{transform: 'scale(.9)'}}
+                                    _hover={{backgroundColor:'#FFD1AD'}}  
+                                >
+                                    Pagar
+                                </Button>
+                            </Th>
                         </Tr>
                     </Tfoot>
                 </Table>

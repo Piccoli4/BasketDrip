@@ -18,7 +18,7 @@ const ItemCount = ({stock, valorInicial, onAdd}) => {
     <Flex h={'20vh'} justify={'space-evenly'} align={'center'} direction={'column'} fontSize={'25px'} fontFamily={'Permanent Marker'}>
       <Box>
         <Button backgroundColor='#FF6F00' onClick={decrementar} marginRight={'15px'}>-</Button>
-        {count}
+        {count} {count === 1 ? 'par' : 'pares'}
         <Button backgroundColor='#FF6F00' onClick={incrementar} marginLeft={'15px'}>+</Button>
       </Box>
       <Box>

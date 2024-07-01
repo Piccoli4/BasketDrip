@@ -5,6 +5,7 @@ import { Link } from 'react-router-dom';
 const Item = ({ marca, modelo, precio, img, id }) => {
   return (
     <Box 
+      h={'450px'}
       border='1px solid #FF6F00'
       borderRadius='10px'
       p={3}

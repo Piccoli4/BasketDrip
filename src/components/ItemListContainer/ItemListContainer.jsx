@@ -9,10 +9,11 @@ import {
     Box
   } from '@chakra-ui/react'
 import { FaAngleDown } from "react-icons/fa6"
-import { getProductos, getProductsByMarca } from '../../data/asyncMock'
 import ItemList from '../ItemList/ItemList'
 import { Link, useParams } from 'react-router-dom'
 import Spinner from '../Spinner/Spinner'
+import { collection, getDocs, query, where } from 'firebase/firestore'
+import { db } from '../../config/firebase'
 
 const ItemListContainer = () => {
 
@@ -23,12 +24,36 @@ const ItemListContainer = () => {
 
   useEffect(() => {
     setLoading(true)
-    const dataProductos = markId ? getProductsByMarca(markId) : getProductos()
-    
-    dataProductos
-    .then((data) => setProductos(data))
-    .catch((error) => console.log(error))
-    .finally(() => setLoading(false))
+    const getData = async () => {
+      // Se obtiene la referencia a la colección 
+      const coleccion = collection(db, 'productos')
+
+      // Se crea una referencia de consulta
+      const queryRef = !markId ?
+      coleccion
+      :
+      // Pasamos la colección y los datos que se quieren filtrar con query
+      query(coleccion, where('marca', '==', markId))
+
+      // Se obtienen los documentos(Productos)
+      const response = await getDocs(queryRef)
+
+      //Se mapean los documentos (productos) y se crea un nuevo objeto con los datos del producto
+      // y el id que se define de manera automatica
+      const productos = response.docs.map((doc) => {
+        const newItem = {
+          ...doc.data(),
+          id: doc.id
+        }
+        return newItem
+      })
+      setProductos(productos)
+      setLoading(false)
+
+    }
+
+    getData()
+
   }, [markId])
 
   return (

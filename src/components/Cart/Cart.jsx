@@ -56,6 +56,7 @@ const Cart = () => {
                     <Thead>
                         <Tr>
                             <Th fontSize={'15px'}>Producto</Th>
+                            <Th textAlign={'center'} fontSize={'15px'}>Talle</Th>
                             <Th textAlign={'center'} fontSize={'15px'}>Precio</Th>
                             <Th textAlign={'center'} fontSize={'15px'}>Cantidad</Th>
                             <Th textAlign={'center'} fontSize={'15px'}>Subtotal</Th>
@@ -106,6 +107,13 @@ const Cart = () => {
                                         fontSize={'18px'}
                                         fontWeight={'500'}
                                     >
+                                        {prod.talle}
+                                    </Td>
+                                    <Td 
+                                        textAlign={'center'}
+                                        fontSize={'18px'}
+                                        fontWeight={'500'}
+                                    >
                                         ${prod.precio}
                                     </Td>
                                     <Td 
@@ -143,6 +151,7 @@ const Cart = () => {
                                     Vaciar Carrito
                                 </Button>
                             </Th>
+                            <Th></Th>
                             <Th colSpan={2} fontSize={'18px'}>Total del carrito</Th>
                             <Th textAlign={'center'} fontSize={'20px'}>${getTotal()}</Th>
                         </Tr>
@@ -150,19 +159,21 @@ const Cart = () => {
                             <Th></Th>
                             <Th colSpan={2}></Th>
                             <Th textAlign={'center'}>
-                                <Button
-                                    w={'60%'}
-                                    fontSize={'20px'}
-                                    fontWeight={'500'} 
-                                    backgroundColor='#FF6F00' 
-                                    p={4}
-                                    boxShadow={'2px 2px 6px #777'}
-                                    textShadow={'1px 1.5px 3px #FFF'}
-                                    _active={{transform: 'scale(.9)'}}
-                                    _hover={{backgroundColor:'#FFD1AD'}}  
-                                >
-                                    Pagar
-                                </Button>
+                                <Link to='/checkout'>
+                                    <Button
+                                        w={'80%'}
+                                        fontSize={'20px'}
+                                        fontWeight={'500'} 
+                                        backgroundColor='#FF6F00' 
+                                        p={4}
+                                        boxShadow={'2px 2px 6px #777'}
+                                        textShadow={'1px 1.5px 3px #FFF'}
+                                        _active={{transform: 'scale(.9)'}}
+                                        _hover={{backgroundColor:'#FFD1AD'}}  
+                                        >
+                                        Finalizar Compra
+                                    </Button>
+                                </Link>
                             </Th>
                         </Tr>
                     </Tfoot>

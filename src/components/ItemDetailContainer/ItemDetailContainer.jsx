@@ -1,27 +1,35 @@
 import React, { useEffect, useState } from 'react'
-import { useNavigate, useParams } from 'react-router-dom'
-import { getProductById } from '../../data/asyncMock'
+import { useParams } from 'react-router-dom'
 import { Flex } from '@chakra-ui/react'
 import Spinner from '../Spinner/Spinner'
 import ItemDetail from '../ItemDetail/ItemDetail'
+import { doc, getDoc } from 'firebase/firestore'
+import { db } from '../../config/firebase'
 
 const ItemDetailContainer = () => {
     const [ producto, setProducto ] = useState()
     const [ loading, setLoading ] = useState(true)
     const { productId } = useParams()
-    const navigate = useNavigate()
 
     useEffect(() => {
-        getProductById(productId)
-            .then((data) => {
-                if(!data) {
-                    navigate('/*')
-                } else {
-                    setProducto(data)
-                }
-            })
-            .catch((error) => console.log(error))
-            .finally(() => setLoading(false))
+        const getData = async () => {
+
+            // Se obtiene la referencia a un producto en específico
+            const queryRef = doc(db, 'productos', productId)
+            
+            // Se obtiene el documento (producto)
+            const response = await getDoc(queryRef)
+
+            // Se crea el objeto con la data y el id
+            const newItem = {
+                ...response.data(), 
+                id: response.id
+            }
+            setProducto(newItem)
+            setLoading(false)
+        }
+
+        getData()
     },[])
 
   return (

@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Box, Flex, Menu, MenuButton, MenuList, MenuItem, Button } from '@chakra-ui/react';
+import { Box, Flex, Menu, MenuButton, MenuList, MenuItem, Button, useBreakpointValue } from '@chakra-ui/react';
 import { FaAngleDown } from 'react-icons/fa6';
 import ItemList from '../ItemList/ItemList';
 import { Link, useParams } from 'react-router-dom';
@@ -54,6 +54,10 @@ const ItemListContainer = () => {
     getData();
   }, [markId]);
 
+  // Mejora el responsive del menu desplegable ajustando el width y centrando sis elementos
+  const menuListStyle = useBreakpointValue({ base: { width: '100vw', left: '0', right: '0' }, md: { width: '200px' } });
+  const menuItemStyle = useBreakpointValue({ base: { justifyContent: 'center' }, md: { justifyContent: 'flex-start' } });
+
   return (
     <Box>
       <Flex align="center">
@@ -62,24 +66,28 @@ const ItemListContainer = () => {
             as={Button}
             rightIcon={<FaAngleDown />}
             backgroundColor={'#FF6F00'}
-            w={'200px'}
+            w={useBreakpointValue({ base: '100%', md: '230px' })}
             borderRadius={'none'}
             fontFamily={'Montserrat, sans-serif'}
             fontWeight={'800'}
           >
             Marcas
           </MenuButton>
-          <MenuList fontFamily={'Montserrat, sans-serif'} fontWeight={'900'}>
-            <MenuItem fontFamily={'Montserrat, sans-serif'} fontWeight={'600'}>
+          <MenuList 
+            fontFamily={'Montserrat, sans-serif'} 
+            fontWeight={'900'}
+            sx={menuListStyle}
+          >
+            <MenuItem fontFamily={'Montserrat, sans-serif'} fontWeight={'600'} sx={menuItemStyle}>
               <Link to="/marca/Nike">Nike</Link>
             </MenuItem>
-            <MenuItem fontFamily={'Montserrat, sans-serif'} fontWeight={'600'}>
+            <MenuItem fontFamily={'Montserrat, sans-serif'} fontWeight={'600'} sx={menuItemStyle}>
               <Link to="/marca/Adidas">Adidas</Link>
             </MenuItem>
-            <MenuItem fontFamily={'Montserrat, sans-serif'} fontWeight={'600'}>
+            <MenuItem fontFamily={'Montserrat, sans-serif'} fontWeight={'600'} sx={menuItemStyle}>
               <Link to="/marca/Under_Armor">Under Armor</Link>
             </MenuItem>
-            <MenuItem fontFamily={'Montserrat, sans-serif'} fontWeight={'600'}>
+            <MenuItem fontFamily={'Montserrat, sans-serif'} fontWeight={'600'} sx={menuItemStyle}>
               <Link to="/marca/361">361°</Link>
             </MenuItem>
           </MenuList>

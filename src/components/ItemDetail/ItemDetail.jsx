@@ -1,7 +1,7 @@
 import React, { useContext, useState } from 'react';
 import ItemCount from '../ItemCount/ItemCount';
 import { ToastContainer, toast } from 'react-toastify';
-import { Box, Button, Flex, Image, Text } from '@chakra-ui/react';
+import { Box, Button, Flex, Image, Text, useBreakpointValue } from '@chakra-ui/react';
 import Context from '../../context/CartContext';
 import { Link } from 'react-router-dom';
 import Swal from 'sweetalert2';
@@ -97,9 +97,19 @@ const ItemDetail = ({
   // Obtener talles únicos disponibles para el producto actual y ordenados de menor a mayor
   const uniqueTalles = [...new Set(productosSimilares.map((prod) => prod.talle))].sort((a,b) => a - b);
 
+  // Mejora el responsive ajustando detalles como la dirección del flex haciendo columnas para pantallas de un ancho menor a 768px
+  // y filas en pantallas mayores a 769px. También ajusta el ancho del flex, alinea los items al centro en celulares o izquierda en 
+  // pantallas mas grandes, ajusta el ancho del contenedor de los botones y los centra o alinea a la izquierda. 
+  const flexDirection = useBreakpointValue({ base: 'column', md: 'row' });
+  const flexWidth = useBreakpointValue({base: '95%', md: '60%'});
+  const flexAlignItems = useBreakpointValue({base: 'center', md: ''});
+  const flexWidthButtonsContainer = useBreakpointValue({base: '100%', sm: '75%', md: '90%', lg: '65%'});
+  const flexJustifyButtons = useBreakpointValue({base: 'center', md: 'left'});
+
+
   return (
-    <Flex justify={'space-evenly'} align={'center'} minH={'70vh'} mb={5}>
-      <Flex maxW={'60%'} direction={'column'} justify={'space-evenly'} align={'center'} gap={1}>
+    <Flex justify={'space-evenly'} align={'center'} minH={'70vh'} mb={5} direction={flexDirection}>
+      <Flex maxW={flexWidth} direction={'column'} justify={'space-evenly'} align={'center'} gap={1}>
         <Flex justify={'center'} align={'center'}>
           <Image
             src={mainImage}
@@ -119,8 +129,8 @@ const ItemDetail = ({
               key={index}
               src={image}
               onClick={() => handleImageClick(image)}
-              w={'100px'}
-              h={'100px'}
+              w={useBreakpointValue({base: '70px', sm: '90px', md: '100px'})}
+              h={useBreakpointValue({base: '70px', sm: '90px', md: '100px'})}
               objectFit={'contain'}
               _hover={{ cursor: 'pointer' }}
               filter={selectedImage === image ? 'grayscale(0%)' : 'grayscale(100%)'}
@@ -131,7 +141,13 @@ const ItemDetail = ({
           ))}
         </Flex>
       </Flex>
-      <Flex w={'40%'} minH={'100%'} direction={'column'} justify={'space-evenly'}>
+      <Flex 
+        w={useBreakpointValue({base: '95%', md: '40%'})} 
+        minH={'100%'} 
+        direction={'column'} 
+        justify={'space-evenly'}
+        alignItems={flexAlignItems}
+      >
         <Text fontFamily="Montserrat, sans-serif" fontWeight="700" fontSize={'25px'} textTransform="uppercase" mb={1}>
           {marca}
         </Text>
@@ -171,9 +187,9 @@ const ItemDetail = ({
         <Text fontFamily="Montserrat, sans-serif" fontWeight="500" fontSize={'30px'} color="primary">
           ${precio.toLocaleString('es-ES')}
         </Text>
-        <Flex>
+        <Flex w={flexWidthButtonsContainer} justify={flexJustifyButtons}>
           {cantidad > 0 ? (
-            <Flex justify={'space-between'} w={'60%'}>
+            <Flex justify={'space-between'} w={'100%'}>
               <Button
                 size="xl"
                 fontWeight={'400'}

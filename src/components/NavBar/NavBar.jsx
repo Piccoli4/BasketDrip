@@ -18,7 +18,8 @@ const NavBar = ({title}) => {
       <Flex justify={'center'} align={'center'} >
           <Heading 
               fontFamily={'Permanent Marker'}
-              fontSize={useBreakpointValue({ base: '30px', md: '45px' })}
+              // Ajusta el tamaño del titulo dependiendo el tamaño de la pantalla en la que se ve el ecommerce.
+              fontSize={useBreakpointValue({ base: '30px', sm: '40px', md: '50px' })}
               textShadow={'3px 3px 2px #777, 7px 7px 5px #ccc'}
           >
               {title}

@@ -11,7 +11,7 @@ import {
     useColorModeValue,
     FormErrorMessage,
   } from '@chakra-ui/react';
-import { Timestamp, addDoc, collection } from 'firebase/firestore';
+import { Timestamp, addDoc, collection, doc, getDoc, updateDoc } from 'firebase/firestore';
 import Swal from 'sweetalert2'
 import { useNavigate } from 'react-router-dom';
 import { db } from '../../config/firebase';
@@ -114,9 +114,40 @@ const Checkout = () => {
         // Se obtiene la referencia a la nueva colección creada (orders)
         const coleccion = collection(db, 'orders')
 
+        // Bandera para controlar si hay suficiente stock
+        let stockIssue = false;
+
         // Se crea el objeto 'order' con los datos del usuario, los datos de la compra,
         // el total y la fecha que se realiza la compra
         try {
+
+            for(const item of cart) {
+                const docRef = doc(db, 'productos', item.id)
+                const productDoc = await getDoc(docRef)
+                const currentStock = productDoc.data().stock
+
+                if(currentStock >= item.quantity) {
+                    // Actualiza el stock del producto
+                    await updateDoc(docRef, {
+                        stock: currentStock - item.quantity
+                    })
+                } else {
+                    stockIssue = true;
+                    Swal.fire({
+                        title: "Producto Sin Stock suficiente",
+                        text: `No hay suficiente stock del producto ${item.marca} ${item.modelo}`,
+                        icon: "warning",
+                        confirmButtonText: "Ok",
+                    });
+                    break; // Rompe el bucle si hay un problema de stock.
+                }
+            }
+
+            if(stockIssue) {
+                setLoading(false);
+                return;
+            }
+
             const order = {
                 buyer: user,
                 cart: cart,
@@ -139,8 +170,9 @@ const Checkout = () => {
               });
 
 
-        } catch (error) {} 
-          finally {
+        } catch (error) {
+            console.error("Error processing order: ", error);
+        } finally {
             setLoading(false);
         }
 
@@ -242,4 +274,4 @@ const Checkout = () => {
   ) 
 }
 
-export default Checkout
+export default Checkout;

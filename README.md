@@ -1,8 +1,65 @@
-# React + Vite
+# BasketDrip
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+### Logo
+![image](/public/Img/logo_readme.jpg)
 
-Currently, two official plugins are available:
+### Visa previa
+![image](/src/assets/BasketDrip.gif)
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+### Deploy
+
+
+### Descripción
+Ecommerce creado para el curso de react en Coderhouse.
+
+### Construido
+- React
+- Firebase
+
+### Dependencias
+- Chakra-UI
+- React-icons 
+- React-phone-input-2 
+- React-router-dom
+- React-spinners
+- React-toastify
+- Sweetalert2
+
+### Instalación 
+#### List
+- Clonar repositorio
+    - git clone https://github.com/Piccoli4/CreaTuLanding-Piccoli
+- Moverse a la carpeta del proyecto.
+    - cd ecommerce
+- Instalamos las dependencias
+    - npm install
+- Compilamos
+    - npm run dev
+
+### Estructura del proyecto
+
+#### NavBar
+
+- Logo
+- Nombre del ecommerce
+- Icono de un carrito
+
+### Body
+- Menú de marcas
+- Listado de productos
+- Detalle del producto
+
+### Navegación
+
+Enrutamiento entre las diferentes vistas
+
+### Carrito
+Vista del carrito de compras
+
+### Checkout
+Formulario para completar los datos del usuario.
+
+### Datos de contacto
+
+- Email: piccoli_44@hotmail.com
+- Linkedin: https://www.linkedin.com/in/augusto-piccoli-69b16a227/

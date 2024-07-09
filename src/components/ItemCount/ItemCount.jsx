@@ -1,25 +1,33 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { Box, Button, Flex } from '@chakra-ui/react'
 
-const ItemCount = ({stock, valorInicial, onAdd}) => {
+const ItemCount = ({valorInicial, onAdd, stock, maxAvailable, isDisabled, resetCount}) => {
 
     const  [count, setCount ] = useState(valorInicial)
 
-    const incrementar = () => {
-        count < stock && setCount(count + 1)
-    }
+    useEffect(() => {
+      setCount(valorInicial)
+    }, [resetCount])
 
+    const incrementar = () => {
+      if (count < stock) {
+        setCount(count + 1);
+      }
+    }
+  
     const decrementar = () => {
-        count > valorInicial && setCount(count - 1)
+      if (count > valorInicial) {
+        setCount(count - 1);
+      }
     }
 
 
   return (
     <Flex h={'20vh'} justify={'space-evenly'} align={'center'} direction={'column'} fontSize={'25px'} fontFamily={'Permanent Marker'}>
       <Box>
-        <Button backgroundColor='#FF6F00' onClick={decrementar} marginRight={'15px'}>-</Button>
+        <Button backgroundColor='#FF6F00' onClick={decrementar} marginRight={'15px'} _hover={{backgroundColor: '#FFC7AD'}} disabled={isDisabled || count <= valorInicial}>-</Button>
         {count} {count === 1 ? 'par' : 'pares'}
-        <Button backgroundColor='#FF6F00' onClick={incrementar} marginLeft={'15px'}>+</Button>
+        <Button backgroundColor='#FF6F00' onClick={incrementar} marginLeft={'15px'} _hover={{backgroundColor: '#FFC7AD'}} disabled={isDisabled || count >= stock}>+</Button>
       </Box>
       <Box>
         <Button 
@@ -31,7 +39,8 @@ const ItemCount = ({stock, valorInicial, onAdd}) => {
           textShadow={'1px 1.5px 3px #FFF'}
           _hover={{backgroundColor: '#FFC7AD'}}
           _active={{transform: 'scale(.9)'}} 
-          onClick={() => onAdd(count)}>
+          onClick={() => onAdd(count)}
+        >
             Agregar al carrito
         </Button>
       </Box>

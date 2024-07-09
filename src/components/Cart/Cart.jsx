@@ -17,7 +17,7 @@ import { Link } from 'react-router-dom';
 
 const Cart = () => {
 
-    const { cart, removeItem, clearCart, getTotal } = useContext(Context)
+    const { cart, removeItem, clearCart, getTotal, incrementarItem, decrementarItem } = useContext(Context)
     if (cart.length === 0) {
         return (
             <Flex justify={'center'} direction={'column'} align={'center'} h={'85vh'}>
@@ -121,7 +121,37 @@ const Cart = () => {
                                         fontSize={'18px'}
                                         fontWeight={'500'}
                                     >
+                                        <Button 
+                                            onClick={() => decrementarItem(prod.id)} 
+                                            backgroundColor='#FF6F00' 
+                                            marginRight={'3px'} 
+                                            padding={'2px'}
+                                            fontSize={'16px'}
+                                            fontWeight={'bolder'}
+                                            height={'30px'} 
+                                            boxShadow={'2px 2px 6px #777'}
+                                            textShadow={'1px 1.5px 3px #FFF'}
+                                            _hover={{backgroundColor: '#FFD1AD'}}
+                                            _active={{transform: 'scale(.9)'}}
+                                        >
+                                            -
+                                        </Button>
                                         {prod.quantity}
+                                        <Button 
+                                            onClick={() => incrementarItem(prod.id, prod.stock)} 
+                                            backgroundColor='#FF6F00' 
+                                            marginLeft={'6px'}
+                                            padding={'3px'}
+                                            fontSize={'16px'}
+                                            fontWeight={'bolder'}
+                                            height={'30px'} 
+                                            boxShadow={'2px 2px 6px #777'}
+                                            textShadow={'1px 1.5px 3px #FFF'}
+                                            _hover={{backgroundColor: '#FFD1AD'}}
+                                            _active={{transform: 'scale(.9)'}}
+                                        >
+                                            +
+                                        </Button>
                                     </Td>
                                     <Td 
                                         textAlign={'center'}

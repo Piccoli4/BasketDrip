@@ -2,10 +2,10 @@ import { Box, Image, Text, Divider, ButtonGroup, Button } from '@chakra-ui/react
 import React from 'react'
 import { Link } from 'react-router-dom';
 
-const Item = ({ marca, modelo, precio, img, id }) => {
+const Item = ({ marca, modelo, precio, img, id, outOfStock }) => {
   return (
     <Box 
-      h={'450px'}
+      h={'420px'}
       border='1px solid #FF6F00'
       borderRadius='10px'
       p={3}
@@ -35,18 +35,30 @@ const Item = ({ marca, modelo, precio, img, id }) => {
       </Text>
       <Divider />
       <ButtonGroup spacing='2' mt={3}>
-        <Link to={`/producto/${id}`}>
-          <Button 
-            size='md' 
-            bg='#FF6F00' 
-            color='white' 
-            textShadow={'2px 1.5px 3px #000'}
-            _hover={{ bg: '#E65C00', boxShadow: '2px 2px 6px #aaa', cursor: 'Pointer' }} 
-            _active={{transform: 'scale(.9)'}}
-          >
-            Detalle
-          </Button>
-        </Link>
+        {outOfStock ? (
+            <Text 
+              fontFamily='Montserrat, sans-serif' 
+              fontWeight='700' 
+              fontSize='20px'
+              color='#FF6F00'
+              textShadow={'2px 1.5px 2px #000'}
+            >
+              Sin stock
+            </Text>
+          ) : (
+            <Link to={`/producto/${id}`}>
+              <Button
+                size='md'
+                bg='#FF6F00'
+                color='white'
+                textShadow={'2px 1.5px 3px #000'}
+                _hover={{ bg: '#E65C00', boxShadow: '2px 2px 6px #aaa', cursor: 'Pointer' }}
+                _active={{ transform: 'scale(.9)' }}
+              >
+                Detalle
+              </Button>
+            </Link>
+          )}
       </ButtonGroup>
     </Box>
   )

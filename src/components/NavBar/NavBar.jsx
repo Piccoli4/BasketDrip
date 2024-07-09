@@ -4,7 +4,8 @@ import {
     Flex,
     Image,
     Heading,
-    Link as ChakraLink
+    Link as ChakraLink,
+    useBreakpointValue
   } from '@chakra-ui/react'
 import { Link } from 'react-router-dom'
 
@@ -17,7 +18,7 @@ const NavBar = ({title}) => {
       <Flex justify={'center'} align={'center'} >
           <Heading 
               fontFamily={'Permanent Marker'}
-              fontSize={'45px'}
+              fontSize={useBreakpointValue({ base: '30px', md: '45px' })}
               textShadow={'3px 3px 2px #777, 7px 7px 5px #ccc'}
           >
               {title}

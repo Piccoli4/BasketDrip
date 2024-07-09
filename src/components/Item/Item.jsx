@@ -1,10 +1,10 @@
-import { Box, Image, Text, Divider, ButtonGroup, Button } from '@chakra-ui/react'
+import { Box, Image, Text, Divider, ButtonGroup, Button, useBreakpointValue, Flex } from '@chakra-ui/react'
 import React from 'react'
 import { Link } from 'react-router-dom';
 
 const Item = ({ marca, modelo, precio, img, id, outOfStock }) => {
   return (
-    <Box 
+    <Flex 
       h={'420px'}
       border='1px solid #FF6F00'
       borderRadius='10px'
@@ -15,6 +15,8 @@ const Item = ({ marca, modelo, precio, img, id, outOfStock }) => {
       display='flex'
       flexDirection='column'
       alignItems='center'
+      justify={'center'}
+      alignContent={'center'}
     >
       <Image 
         src={img} 
@@ -24,13 +26,13 @@ const Item = ({ marca, modelo, precio, img, id, outOfStock }) => {
         objectFit='contain'
         boxSize='260px'
       />
-      <Text fontFamily='Montserrat, sans-serif' fontWeight='600'>
+      <Text fontFamily='Montserrat, sans-serif' fontWeight='600' fontSize={useBreakpointValue({ base: '16px', md: '18px' })}>
         {marca}
       </Text>
-      <Text fontFamily='Montserrat, sans-serif' fontWeight='500' color='gray.500'>
+      <Text fontFamily='Montserrat, sans-serif' fontWeight='500' color='gray.500' fontSize={useBreakpointValue({ base: '14px', md: '14px' })}>
         {modelo}
       </Text>
-      <Text fontFamily='Montserrat, sans-serif' fontWeight='bold' fontSize={'18px'} color='primary' mt={2}>
+      <Text fontFamily='Montserrat, sans-serif' fontWeight='bold' fontSize={useBreakpointValue({ base: '12px', md: '18px' })} color='primary' mt={2}>
         ${precio.toLocaleString('es-ES')}
       </Text>
       <Divider />
@@ -60,7 +62,7 @@ const Item = ({ marca, modelo, precio, img, id, outOfStock }) => {
             </Link>
           )}
       </ButtonGroup>
-    </Box>
+    </Flex>
   )
 }
 

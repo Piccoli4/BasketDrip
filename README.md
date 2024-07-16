@@ -28,7 +28,7 @@ Ecommerce creado para el curso de react en Coderhouse.
 ### Instalación 
 #### List
 - Clonar repositorio
-    - git clone https://github.com/Piccoli4/CreaTuLanding-Piccoli
+    - git clone https://github.com/Piccoli4/BasketDrip
 - Moverse a la carpeta del proyecto.
     - cd ecommerce
 - Instalamos las dependencias
